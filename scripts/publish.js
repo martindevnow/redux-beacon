@@ -102,7 +102,7 @@ const isPrBuild = Boolean(process.env.CIRCLE_PULL_REQUEST);
 
   log.info('Push changes to remote');
 
-  const ghAuthorizedUrl = `https://${GH_TOKEN}@github.com/rangle/redux-beacon.git`;
+  const ghAuthorizedUrl = `https://${GH_TOKEN}@github.com/martindevnow/redux-beacon.git`;
 
   await execa('git', ['push', ghAuthorizedUrl, CIRCLE_BRANCH]);
   await execa('git', ['push', ghAuthorizedUrl, tagName]);
@@ -116,6 +116,7 @@ async function getCommitMessage(commitSha) {
   return await execa.stdout('git', ['log', '--format=%B', '-n 1', commitSha]);
 }
 
+// i.e. [google-analytics-gtag.patch] publish to npm
 function extractPublishCommand(commitMsg) {
   try {
     return commitMsg.match(/^\[[\w\-]+.(patch|minor|major)\]/)[0];
@@ -125,10 +126,7 @@ function extractPublishCommand(commitMsg) {
 }
 
 function splitPublishCommand(publishCommand) {
-  return publishCommand
-    .replace('[', '')
-    .replace(']', '')
-    .split('.');
+  return publishCommand.replace('[', '').replace(']', '').split('.');
 }
 
 async function getPathToPackage(packageName) {
