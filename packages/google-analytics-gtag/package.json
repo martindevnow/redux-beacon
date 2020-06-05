@@ -1,5 +1,5 @@
 {
-  "name": "@redux-beacon/google-analytics-gtag",
+  "name": "martindevnow/google-analytics-gtag",
   "version": "1.0.5",
   "description": "Google Analytics (gtag.js) integration for Redux",
   "main": "dist/index.js",
